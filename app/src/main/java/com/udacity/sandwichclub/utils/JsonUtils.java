@@ -31,15 +31,15 @@ public class JsonUtils {
         try {
             JSONObject reader = new JSONObject(json);
             JSONObject jsonName = reader.getJSONObject("name");
-            mainName = jsonName.getString("mainName");
+            mainName = jsonName.optString("mainName", "Sandwich");
             JSONArray jsonAka = jsonName.getJSONArray("alsoKnownAs");
             if (jsonAka != null) {
                 for (int i = 0; i < jsonAka.length(); i++) {
                     alsoKnownAs.add(jsonAka.getString(i));
                 }
             }
-            placeOfOrigin = reader.getString("placeOfOrigin");
-            description = reader.getString("description");
+            placeOfOrigin = reader.optString("placeOfOrigin", "N/A");
+            description = reader.optString("description", "N/A");
             imageUrl = reader.getString("image");
             JSONArray jsonIngre = reader.getJSONArray("ingredients");
             if (jsonIngre != null) {

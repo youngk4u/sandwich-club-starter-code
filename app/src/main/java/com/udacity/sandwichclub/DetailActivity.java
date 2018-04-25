@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
             String trimmedAka = aka.substring(1, aka.length() - 1);
             alsoKnownAsTv.setText(trimmedAka);
         } else {
-            alsoKnownAsTv.setText("N/A");
+            alsoKnownAsTv.setText(R.string.detail_error_message);
         }
 
         /** Ingredient TextView */
@@ -80,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
             String trimmedIngre = ingre.substring(1, ingre.length() - 1);
             ingredientTv.setText(trimmedIngre);
         } else {
-            ingredientTv.setText("N/A");
+            ingredientTv.setText(R.string.detail_error_message);
         }
 
         /** Place of origin TextView */

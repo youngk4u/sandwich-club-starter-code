@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -43,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
+        populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
@@ -56,7 +59,43 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(Sandwich sw) {
+
+        /** Also Known As TextView */
+        TextView alsoKnownAsTv = findViewById(R.id.also_known_tv);
+        List<String> alsoKnownAsList = sw.getAlsoKnownAs();
+        if (alsoKnownAsList.size() != 0) {
+            String aka = alsoKnownAsList.toString();
+            String trimmedAka = aka.substring(1, aka.length() - 1);
+            alsoKnownAsTv.setText(trimmedAka);
+        } else {
+            alsoKnownAsTv.setText("N/A");
+        }
+
+        /** Ingredient TextView */
+        TextView ingredientTv = findViewById(R.id.ingredients_tv);
+        List<String> ingredientList = sw.getIngredients();
+        if (ingredientList.size() != 0) {
+            String ingre = ingredientList.toString();
+            String trimmedIngre = ingre.substring(1, ingre.length() - 1);
+            ingredientTv.setText(trimmedIngre);
+        } else {
+            ingredientTv.setText("N/A");
+        }
+
+        /** Place of origin TextView */
+        TextView placeOfOriginTv = findViewById(R.id.origin_tv);
+        String origin = sw.getPlaceOfOrigin();
+        if (origin.length() != 0) {
+            placeOfOriginTv.setText(origin);
+        } else {
+            placeOfOriginTv.setText("Unknown");
+        }
+
+        /** Description TextView */
+        TextView descriptionTv = findViewById(R.id.description_tv);
+        String description = sw.getDescription();
+        descriptionTv.setText(description);
 
     }
 }
